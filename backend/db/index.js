@@ -1,14 +1,22 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false
-});
+const useDatabaseUrl = Boolean(process.env.DATABASE_URL);
+const useSsl = process.env.DB_SSL === 'true' || useDatabaseUrl || process.env.NODE_ENV === 'production';
+
+const pool = useDatabaseUrl
+  ? new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: useSsl ? { rejectUnauthorized: false } : false
+    })
+  : new Pool({
+      user: process.env.DB_USER,
+      host: process.env.DB_HOST,
+      database: process.env.DB_DATABASE,
+      password: process.env.DB_PASSWORD,
+      port: process.env.DB_PORT,
+      ssl: useSsl ? { rejectUnauthorized: false } : false
+    });
 
 const initializeDatabase = async () => {
   const createResumesTableQuery = `

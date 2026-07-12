@@ -7,18 +7,8 @@ services:
     startCommand: npm start
     plan: free
     envVars:
-      - key: DB_USER
+      - key: DATABASE_URL
         sync: false
-      - key: DB_PASSWORD
-        sync: false
-      - key: DB_HOST
-        sync: false
-      - key: DB_PORT
-        value: 5432
-      - key: DB_DATABASE
-        sync: false
-      - key: DB_SSL
-        value: true
       - key: GOOGLE_API_KEY
         sync: false
       - key: NODE_ENV

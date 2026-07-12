@@ -78,7 +78,9 @@ Use the included [render.yaml](render.yaml) or create a new Web Service with:
 - Root directory: `backend`
 - Build command: `npm install`
 - Start command: `npm start`
-- Environment variables: `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_SSL=true`, `GOOGLE_API_KEY`, `NODE_ENV=production`
+- Environment variables: `DATABASE_URL`, `GOOGLE_API_KEY`, `NODE_ENV=production`
+
+If you prefer separate database fields, the backend still supports `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, and `DB_SSL=true`.
 
 ### Frontend on Vercel
 
