@@ -1,262 +1,74 @@
 # CVision
 
+CVision is a full-stack resume analysis app. Users upload a PDF resume, the backend extracts text, sends it to Google Gemini for analysis, and stores the result in PostgreSQL. The frontend shows the analysis, resume history, and detailed feedback.
 
+## Tech Stack
 
+- Frontend: React, Axios, CSS
+- Backend: Node.js, Express, Multer, pdf-parse
+- Database: PostgreSQL
+- AI: Google Gemini API
 
-[🚀 Live Demo](https://resume-analyzer-omega-steel.vercel.app/) | [📖 API Docs](#api-endpoints) | [🛠️ Setup Guide](#installation)
+## Local Setup
 
+### Requirements
 
+- Node.js 14+
+- PostgreSQL 12+
+- Google Gemini API key
 
-## 🌟 Features
+### Install
 
-- **📄 PDF Resume Upload** - Drag & drop or click to upload PDF resumes (up to 5MB)
-- **🤖 AI-Powered Analysis** - Google Gemini API extracts and analyzes resume content
-- **⭐ Resume Rating** - Get a comprehensive 1-10 rating with detailed feedback
-- **💡 Smart Suggestions** - Receive personalized improvement recommendations
-- **📊 Skills Extraction** - Automatic identification of technical and soft skills
-- **📈 Upskill Recommendations** - AI-suggested skills to enhance your career
-- **📋 Historical Tracking** - View and manage all previously analyzed resumes
-- **🎨 Modern UI/UX** - Responsive design with beautiful animations
-- **🔒 Secure Storage** - PostgreSQL database with JSONB for structured data
-
-## 🏗️ Tech Stack
-
-### Frontend
-- **React.js** - Modern UI library with hooks
-- **Axios** - HTTP client for API requests
-- **CSS3** - Custom styling with gradients and animations
-- **Responsive Design** - Mobile-first approach
-
-### Backend
-- **Node.js & Express.js** - RESTful API server
-- **Multer** - File upload handling
-- **pdf-parse** - PDF text extraction
-- **PostgreSQL** - Relational database with JSONB support
-- **Google Gemini API** - AI-powered text analysis
-
-### Infrastructure
-- **Frontend Hosting:** [Vercel](https://vercel.com)
-- **Backend Hosting:** [Render](https://render.com)
-- **Database:** Render PostgreSQL
-- **Version Control:** GitHub
-
-## 🚀 Quick Start
-
-### Live Application
-- **Frontend:** https://resume-analyzer-omega-steel.vercel.app/
-- **Backend API:** https://resume-analyzer-backend-h5fa.onrender.com
-
-### Using the Application
-1. Visit the [live application](https://resume-analyzer-omega-steel.vercel.app/)
-2. Upload your PDF resume using drag & drop or file picker
-3. Wait for AI analysis (typically 10-30 seconds)
-4. Review your resume rating and improvement suggestions
-5. Check the "Historical Viewer" tab to see all your previous analyses
-
-## 🛠️ Local Development Setup
-
-### Prerequisites
-- **Node.js** (v14 or higher)
-- **PostgreSQL** (v12 or higher)
-- **Google Gemini API Key** ([Get it here](https://aistudio.google.com/))
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Anshudh/CVision.git
-   cd CVision
-   ```
-
-2. **Backend Setup**
-   ```bash
-   cd backend
-   npm install
-   ```
-
-3. **Frontend Setup**
-   ```bash
-   cd frontend
-   npm install
-   ```
-
-4. **Environment Configuration**
-   
-   Create `backend/.env`:
-   ```env
-   DB_USER=postgres
-   DB_PASSWORD=your_postgres_password
-   DB_HOST=localhost
-   DB_PORT=5432
-   DB_DATABASE=resume_analyzer
-   GOOGLE_API_KEY=your_gemini_api_key
-   PORT=5000
-   NODE_ENV=development
-   ```
-
-5. **Database Setup**
-   
-   Create PostgreSQL database and table:
-   ```sql
-   CREATE DATABASE resume_analyzer;
-   
-   \c resume_analyzer;
-   
-   CREATE TABLE resumes (
-       id SERIAL PRIMARY KEY,
-       file_name VARCHAR(255) NOT NULL,
-       uploaded_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-       name VARCHAR(255),
-       email VARCHAR(255),
-       phone VARCHAR(50),
-       linkedin_url VARCHAR(255),
-       portfolio_url VARCHAR(255),
-       summary TEXT,
-       work_experience JSONB,
-       education JSONB,
-       technical_skills JSONB,
-       soft_skills JSONB,
-       projects JSONB,
-       certifications JSONB,
-       resume_rating INTEGER,
-       improvement_areas TEXT,
-       upskill_suggestions JSONB
-   );
-   ```
-
-6. **Start the Application**
-   ```bash
-   # Backend (Terminal 1)
-   cd backend
-   npm run dev
-   
-   # Frontend (Terminal 2)
-   cd frontend
-   npm start
-   ```
-
-7. **Access the Application**
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:5000
-
-## 📡 API Endpoints
-
-| Method | Endpoint | Description | Request Body |
-|--------|----------|-------------|--------------|
-| `GET` | `/health` | Health check | None |
-| `POST` | `/api/resumes/upload` | Upload and analyze resume | `multipart/form-data` with `resume` file |
-| `GET` | `/api/resumes` | Get all resumes (summary) | None |
-| `GET` | `/api/resumes/:id` | Get detailed resume by ID | None |
-
-### API Response Examples
-
-**Health Check Response:**
-```json
-{
-  "status": "OK",
-   "message": "CVision API is running",
-  "database": "Connected",
-  "ai_integration": "Configured",
-  "timestamp": "2024-07-24T12:30:45.123Z"
-}
+```bash
+git clone https://github.com/Anshudh/CVision.git
+cd CVision
+cd backend && npm install
+cd ../frontend && npm install
 ```
 
-**Resume Analysis Response:**
-```json
-{
-  "id": 1,
-  "file_name": "john_doe_resume.pdf",
-  "uploaded_at": "2024-07-24T12:30:45.123Z",
-  "name": "John Doe",
-  "email": "john.doe@email.com",
-  "phone": "+1-555-123-4567",
-  "linkedin_url": "https://linkedin.com/in/johndoe",
-  "summary": "Experienced software developer with 5+ years...",
-  "work_experience": [
-    {
-      "role": "Senior Software Developer",
-      "company": "Tech Corp",
-      "duration": "2021-2024",
-      "description": ["Led development of web applications", "Managed team of 3 developers"]
-    }
-  ],
-  "technical_skills": ["JavaScript", "React", "Node.js", "Python"],
-  "resume_rating": 8,
-  "improvement_areas": "Consider adding more quantifiable achievements...",
-  "upskill_suggestions": ["TypeScript", "Docker", "Kubernetes", "AWS"]
-}
+### Backend env
+
+Create `backend/.env`:
+
+```env
+DB_USER=postgres
+DB_PASSWORD=your_postgres_password
+DB_HOST=localhost
+DB_PORT=5432
+DB_DATABASE=resume_analyzer
+DB_SSL=false
+GOOGLE_API_KEY=your_gemini_api_key
+PORT=5000
+NODE_ENV=development
 ```
 
-## 📁 Project Structure
+### Run
 
-```
-resume-analyzer/
-├── 📁 backend/
-│   ├── 📁 controllers/
-│   │   └── resumeController.js     # API route handlers
-│   ├── 📁 routes/
-│   │   └── resumeRoutes.js        # API route definitions
-│   ├── 📁 services/
-│   │   └── analysisService.js     # PDF processing & AI analysis
-│   ├── 📁 db/
-│   │   └── index.js               # Database connection
-│   ├── .env                       # Environment variables
-│   ├── server.js                  # Express server entry point
-│   └── package.json               # Backend dependencies
-├── 📁 frontend/
-│   ├── 📁 src/
-│   │   ├── 📁 components/
-│   │   │   ├── ResumeUploader.js  # File upload component
-│   │   │   ├── ResumeDetails.js   # Analysis results display
-│   │   │   └── PastResumesTable.js# Historical data table
-│   │   ├── App.js                 # Main React component
-│   │   ├── App.css               # Global styles
-│   │   └── index.js              # React entry point
-│   └── package.json              # Frontend dependencies
-├── 📁 sample_data/               # Test PDF files
-├── 📁 screenshots/               # Application screenshots
-└── README.md                     # This file
+```bash
+# terminal 1
+cd backend
+npm run dev
+
+# terminal 2
+cd frontend
+npm start
 ```
 
-## 🔧 Configuration
+- Frontend: http://localhost:3000
+- Backend: http://localhost:5000
 
-### Environment Variables
+## API Endpoints
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `DB_USER` | PostgreSQL username | `postgres` |
-| `DB_PASSWORD` | PostgreSQL password | `your_password` |
-| `DB_HOST` | Database host | `localhost` or `dpg-xxx.render.com` |
-| `DB_PORT` | Database port | `5432` |
-| `DB_DATABASE` | Database name | `resume_analyzer` |
-| `GOOGLE_API_KEY` | Google Gemini API key | `AIza...` |
-| `PORT` | Server port | `5000` |
-| `NODE_ENV` | Environment | `development` or `production` |
+- `GET /health` - health check
+- `POST /api/resumes/upload` - upload and analyze a PDF resume
+- `GET /api/resumes` - list saved resume analyses
+- `GET /api/resumes/:id` - get one resume analysis
 
-### AI Analysis Features
+## Notes
 
-The Google Gemini AI extracts and analyzes:
-- **Personal Information** (Name, Email, Phone, LinkedIn)
-- **Professional Summary**
-- **Work Experience** with roles, companies, and achievements
-- **Education** background
-- **Technical & Soft Skills**
-- **Projects** with technologies used
-- **Certifications**
-- **Resume Rating** (1-10 scale)
-- **Improvement Suggestions**
-- **Upskilling Recommendations**
-
-## 🚀 Deployment
-
-### Automatic Deployment Setup
-
-Both frontend and backend are configured for automatic deployment:
-
-- **Backend (Render):** Automatically deploys on push to `main` branch
-- **Frontend (Vercel):** Automatically deploys on push to `main` branch
-
-### Manual Deployment
+- The backend auto-creates the `resumes` table on startup.
+- Frontend requests point to the local backend by default.
+- Deployed app links were removed here to keep the README focused on the repo itself.
 
 **Backend to Render:**
 1. Connect your GitHub repository to Render
