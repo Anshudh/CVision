@@ -9,12 +9,21 @@ const PORT = process.env.PORT || 5000;
 
 // Validate required environment variables
 const validateEnvironment = () => {
-  const required = ['DB_USER', 'DB_PASSWORD', 'DB_DATABASE', 'GOOGLE_API_KEY'];
-  const missing = required.filter(key => !process.env[key]);
+  const missing = [];
+  
+  if (!process.env.DATABASE_URL) {
+    if (!process.env.DB_USER) missing.push('DB_USER (or DATABASE_URL)');
+    if (!process.env.DB_PASSWORD) missing.push('DB_PASSWORD (or DATABASE_URL)');
+    if (!process.env.DB_DATABASE) missing.push('DB_DATABASE (or DATABASE_URL)');
+  }
+  
+  if (!process.env.GOOGLE_API_KEY) {
+    missing.push('GOOGLE_API_KEY');
+  }
   
   if (missing.length > 0) {
     console.error('❌ Missing required environment variables:', missing.join(', '));
-    console.error('Please check your .env file');
+    console.error('Please check your .env file or environment configuration');
     process.exit(1);
   }
   
