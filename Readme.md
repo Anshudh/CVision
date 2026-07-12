@@ -64,7 +64,6 @@ npm start
 - `GET /api/resumes` - list saved resume analyses
 - `GET /api/resumes/:id` - get a single resume analysis
 
-## Notes
 
 - The backend auto-creates the `resumes` table on startup.
 - Frontend requests point to the local backend by default.
