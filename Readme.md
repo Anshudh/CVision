@@ -1,6 +1,6 @@
 # CVision
 
-CVision is a full-stack resume analysis app. Users upload a PDF resume, the backend extracts text, sends it to Google Gemini for analysis, and stores the result in PostgreSQL. The frontend shows the analysis, resume history, and detailed feedback.
+CVision is a full-stack resume analysis app. Users upload a PDF resume, the backend extracts the text, sends it to Google Gemini for analysis, and stores the result in PostgreSQL. The frontend shows the analysis output and saved resume history.
 
 ## Tech Stack
 
@@ -26,7 +26,7 @@ cd backend && npm install
 cd ../frontend && npm install
 ```
 
-### Backend env
+### Backend Environment
 
 Create `backend/.env`:
 
@@ -62,16 +62,10 @@ npm start
 - `GET /health` - health check
 - `POST /api/resumes/upload` - upload and analyze a PDF resume
 - `GET /api/resumes` - list saved resume analyses
-- `GET /api/resumes/:id` - get one resume analysis
+- `GET /api/resumes/:id` - get a single resume analysis
 
 ## Notes
 
 - The backend auto-creates the `resumes` table on startup.
 - Frontend requests point to the local backend by default.
-- Deployed app links were removed here to keep the README focused on the repo itself.
-
-## Deployment
-
-- Backend deploys as a Node web service.
-- Frontend deploys as a React app with the root directory set to `frontend`.
-
+- The app uses the CVision title and dark theme branding.
