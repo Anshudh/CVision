@@ -1,4 +1,4 @@
-# Resume Analyzer
+# CVision
 
 
 
@@ -64,8 +64,8 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/resume-analyzer.git
-   cd resume-analyzer
+   git clone https://github.com/Anshudh/CVision.git
+   cd CVision
    ```
 
 2. **Backend Setup**
@@ -154,7 +154,7 @@
 ```json
 {
   "status": "OK",
-  "message": "Resume Analyzer API is running",
+   "message": "CVision API is running",
   "database": "Connected",
   "ai_integration": "Configured",
   "timestamp": "2024-07-24T12:30:45.123Z"
