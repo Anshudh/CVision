@@ -608,7 +608,7 @@ a:hover {
 
 .resumes-table th {
   text-align: left;
-  color: var(--text);
+  color: #ffffff !important;
   background: var(--accent-gradient);
 }
 
