@@ -69,3 +69,23 @@ npm start
 - The backend auto-creates the `resumes` table on startup.
 - Frontend requests point to the local backend by default.
 - The app uses the CVision title and dark theme branding.
+
+## Deployment
+
+### Backend on Render
+
+Use the included [render.yaml](render.yaml) or create a new Web Service with:
+
+- Root directory: `backend`
+- Build command: `npm install`
+- Start command: `npm start`
+- Environment variables: `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_SSL=true`, `GOOGLE_API_KEY`, `NODE_ENV=production`
+
+### Frontend on Vercel
+
+- Root directory: `frontend`
+- Build command: `npm run build`
+- Output directory: `build`
+- Set `REACT_APP_API_BASE_URL` to your Render backend URL
+
+For local frontend testing, copy `frontend/.env.example` to `frontend/.env`.
